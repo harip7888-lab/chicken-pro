@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#C2410C">
+<meta name="mobile-web-app-capable" content="yes">
+<title>RetailPro Mini</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<style>
+:root{--p:#C2410C;--p2:#EA580C;--pl:#FFEDD5;--bg:#FFF8F1;--card:#fff;--tx:#1C1917;--mu:#78716C;--ln:#E7E5E4;--ok:#15803D;--okl:#DCFCE7;--bad:#B91C1C;--badl:#FEE2E2;--warn:#B45309;--warnl:#FEF3C7;--r:14px}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans Tamil",sans-serif}
+body{padding-bottom:calc(72px + env(safe-area-inset-bottom))}
+header#top{position:sticky;top:0;z-index:5;background:var(--p);color:#fff;display:flex;align-items:center;gap:8px;padding:10px 14px;padding-top:calc(10px + env(safe-area-inset-top))}
+#back{background:none;border:0;color:#fff;font-size:28px;line-height:1;padding:0 6px 2px 0;cursor:pointer}
+.brand{font-weight:700;font-size:17px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brand small{display:block;font-weight:400;font-size:12px;opacity:.85}
+.net{font-size:12px;background:rgba(255,255,255,.2);padding:4px 10px;border-radius:99px;white-space:nowrap}
+.net.off{background:#FDE68A;color:#7C2D12;font-weight:700}
+main{max-width:980px;margin:0 auto;padding:14px}
+nav#nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--ln);display:flex;z-index:6;padding-bottom:env(safe-area-inset-bottom)}
+nav#nav a{flex:1;text-align:center;padding:7px 2px 9px;color:var(--mu);text-decoration:none;font-size:12px}
+nav#nav a i{display:block;font-style:normal;font-size:21px;line-height:1.25}
+nav#nav a.on{color:var(--p);font-weight:700}
+.card{background:var(--card);border:1px solid var(--ln);border-radius:var(--r);padding:14px;margin-bottom:12px}
+.kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:12px}
+@media(min-width:720px){.kpis{grid-template-columns:repeat(4,1fr)}}
+.kpi{background:#fff;border:1px solid var(--ln);border-radius:var(--r);padding:12px;min-width:0}
+.kpi span{font-size:13px;color:var(--mu)}.kpi b{display:block;font-size:22px;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.kpi small{color:var(--mu);font-size:12px}
+.kpi.hl{background:var(--p);border-color:var(--p);color:#fff}.kpi.hl span,.kpi.hl small{color:#FFEDD5}
+.actions{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(min-width:720px){.actions{grid-template-columns:repeat(4,1fr)}}
+.action{display:flex;gap:10px;align-items:center;background:#fff;border:1px solid var(--ln);border-radius:var(--r);padding:12px;text-decoration:none;color:inherit;min-height:72px}
+.action i{font-style:normal;font-size:26px}.action b{display:block}.action small{color:var(--mu);font-size:13px}
+.action.primary{background:var(--p);color:#fff;border-color:var(--p)}.action.primary small{color:#FFEDD5}
+h2{font-size:19px;margin:2px 0 12px}h3{margin:0 0 12px;font-size:18px}
+.sec{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:.05em;margin:18px 2px 8px}
+.muted{color:var(--mu)}.center{text-align:center}.ok{color:var(--ok)}.bad{color:var(--bad)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--ln);background:#fff;color:var(--tx);border-radius:12px;padding:10px 16px;font:inherit;font-weight:600;cursor:pointer;min-height:46px;text-decoration:none}
+.btn.primary{background:var(--p);border-color:var(--p);color:#fff}
+.btn.danger{color:var(--bad);border-color:#FCA5A5}
+.btn.big{width:100%;min-height:56px;font-size:18px;margin-top:10px}
+.btn.ghost{border:0;background:none;color:var(--mu);width:100%}
+.btn.sm{min-height:36px;padding:6px 12px;font-size:14px}
+.btn.full{width:100%}
+.btn:disabled{opacity:.5}
+.field{display:block;margin-bottom:12px}.field>span{display:block;font-size:13px;color:var(--mu);margin-bottom:4px}
+input,select,textarea{width:100%;font:inherit;padding:11px 12px;border:1px solid #D6D3D1;border-radius:12px;background:#fff;color:var(--tx);min-height:48px}
+textarea{min-height:120px;font-family:ui-monospace,monospace;font-size:13px}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--p2);border-color:transparent}
+input[readonly]{background:#F5F5F4}
+input[type=checkbox]{width:22px;height:22px;min-height:0;accent-color:var(--p)}
+input.small{width:120px;text-align:right;min-height:40px;padding:8px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(max-width:600px){.grid2.r1{grid-template-columns:1fr}}
+.row{display:flex;align-items:center;gap:10px}.between{justify-content:space-between}.wrap{flex-wrap:wrap}.gap>*{flex:1}
+.tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:12px}
+@media(min-width:600px){.tiles{grid-template-columns:repeat(3,1fr)}}@media(min-width:900px){.tiles{grid-template-columns:repeat(4,1fr)}}
+.tile{background:#fff;border:2px solid var(--ln);border-radius:var(--r);padding:12px;text-align:left;font:inherit;color:inherit;cursor:pointer;min-height:90px;display:flex;flex-direction:column;gap:2px}
+.tile:active{border-color:var(--p);background:var(--pl)}.tile b{font-size:15px}.tile .rate{color:var(--p);font-weight:700;font-size:17px}.tile small{color:var(--mu)}
+.tile.out small{color:var(--bad);font-weight:600}
+.line{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px dashed var(--ln)}
+.line>div:first-child{flex:1;min-width:0}.line small{display:block;color:var(--mu)}.line .amt{font-weight:700}
+.x{border:0;background:var(--badl);color:var(--bad);width:34px;height:34px;border-radius:50%;font-size:14px;cursor:pointer;flex:none}
+.grand{font-size:21px;padding:8px 0}
+.seg{display:flex;background:#F5F5F4;border-radius:12px;padding:4px;gap:4px;margin-bottom:12px}
+.seg button{flex:1;border:0;background:none;padding:10px 6px;border-radius:9px;font:inherit;font-weight:600;color:var(--mu);cursor:pointer;min-height:44px}
+.seg button.on{background:#fff;color:var(--p);box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:-2px 0 12px}
+.chip{border:1px solid var(--ln);background:#fff;border-radius:99px;padding:8px 14px;font:inherit;font-weight:600;cursor:pointer;min-height:40px;color:inherit}
+.chip.on{background:var(--pl);border-color:var(--p2);color:var(--p)}
+.calc{font-size:18px;min-height:28px;margin-bottom:4px}
+.list .item{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--ln)}.list .item:last-child{border:0}
+.item .main{flex:1;min-width:0}.item small{display:block;color:var(--mu)}.item.tap{cursor:pointer}
+.item .val{text-align:right;font-weight:700;white-space:nowrap}
+.badge{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:99px;background:#F5F5F4;color:var(--mu);vertical-align:middle}
+.badge.ok{background:var(--okl);color:var(--ok)}.badge.bad{background:var(--badl);color:var(--bad)}.badge.warn{background:var(--warnl);color:var(--warn)}.badge.p{background:var(--pl);color:var(--p)}
+.alert{border-radius:12px;padding:10px 12px;margin-bottom:10px;font-size:14px}
+.alert.bad{background:var(--badl);color:#7F1D1D}.alert.warn{background:var(--warnl);color:#78350F}.alert.info{background:#E0F2FE;color:#0C4A6E}
+table{width:100%;border-collapse:collapse;font-size:14px}th,td{padding:8px 6px;border-bottom:1px solid var(--ln);text-align:left}th{color:var(--mu);font-weight:600;font-size:12px}td.n,th.n{text-align:right;white-space:nowrap}
+.tblwrap{overflow-x:auto}
+.overlay{position:fixed;inset:0;background:rgba(28,25,23,.5);z-index:20;display:flex;align-items:flex-end;justify-content:center}
+.sheet{background:#fff;width:100%;max-width:560px;max-height:92vh;overflow:auto;border-radius:20px 20px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom))}
+@media(min-width:720px){.overlay{align-items:center}.sheet{border-radius:20px}}
+.hidden{display:none!important}
+#toast{position:fixed;left:50%;bottom:92px;transform:translateX(-50%) translateY(20px);background:#1C1917;color:#fff;padding:10px 16px;border-radius:12px;opacity:0;transition:.25s;z-index:40;pointer-events:none;max-width:90vw;text-align:center}
+#toast.show{opacity:1;transform:translateX(-50%)}#toast.bad{background:var(--bad)}
+.receipt{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;background:#FAFAF9;border:1px dashed #D6D3D1;border-radius:10px;padding:12px;margin-bottom:12px;color:#000}
+.receipt .c{text-align:center}.receipt .r{display:flex;justify-content:space-between;gap:8px}.receipt hr{border:0;border-top:1px dashed #A8A29E;margin:6px 0}.receipt .big{font-size:16px;font-weight:700}
+.void-stamp{color:var(--bad);font-weight:800;text-align:center;font-size:18px;letter-spacing:.2em}
+.login{max-width:420px;margin:24px auto}
+.logo{width:72px;height:72px;border-radius:18px;background:var(--p);color:#fff;display:flex;align-items:center;justify-content:center;font-size:38px;margin:0 auto 10px}
+.big-num{font-size:28px;font-weight:800}
+#printArea{display:none}
+@media print{
+  @page{margin:2mm}
+  html,body{background:#fff;padding:0}
+  body>*:not(#printArea){display:none!important}
+  #printArea{display:block!important;width:var(--paper,58mm);color:#000}
+  #printArea .receipt{border:0;background:none;padding:0;margin:0;font-size:11px}
+  #printArea.wide{width:auto}
+  #printArea.wide .noprint{display:none}
+}
+</style>
+</head>
+<body>
+<header id="top" class="hidden"><button id="back" class="hidden" aria-label="Back">‹</button><div class="brand" id="shopName">RetailPro Mini</div><div id="net" class="net"></div></header>
+<main id="view"><p class="center muted" style="margin-top:40vh">Loading…</p></main>
+<nav id="nav" class="hidden"></nav>
+<div id="toast"></div>
+<div id="printArea"></div>
+<script>
+'use strict';
+/* ============================================================
+   RetailPro Mini — mobile-first poultry shop POS
+   1) Paste your Firebase web config below (Project settings → Your apps → Web app).
+   2) Leave it as null to choose "Connect Firebase" or "Demo mode" on first open.
+   ============================================================ */
+const FIREBASE_CONFIG = null;
+/* Example:
+const FIREBASE_CONFIG = {
+  apiKey: "AIza...", authDomain: "your-project.firebaseapp.com", projectId: "your-project",
+  storageBucket: "your-project.appspot.com", messagingSenderId: "1234567890", appId: "1:1234567890:web:abc123"
+};
+*/
+const USER_DOMAIN = 'retailpro.local';   // usernames become  username@retailpro.local  in Firebase Auth
+const VER = '1.1.0';
+const FB_VER = '10.12.5';
+
+/* ---------- helpers ---------- */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const num = v => { const n = parseFloat(v); return isFinite(n) ? n : 0; };
+const r2 = n => Math.round((n + Number.EPSILON) * 100) / 100;
+const r3 = n => Math.round((n + Number.EPSILON) * 1000) / 1000;
+const money = n => { const v = r2(num(n)); return (v < 0 ? '−₹' : '₹') + Math.abs(v).toLocaleString('en-IN', {minimumFractionDigits: 0, maximumFractionDigits: 2}); };
+const pl = (n, w) => n + ' ' + w + (n === 1 ? '' : 's');
+const qtyTxt = (q, u) => u === 'kg' ? r3(num(q)).toFixed(3) + ' kg' : r3(num(q)) + ' ' + (u || 'pc');
+const pad = n => String(n).padStart(2, '0');
+const dayKey = (d = new Date()) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+const addDays = (k, n) => { const d = new Date(k + 'T00:00:00'); d.setDate(d.getDate() + n); return dayKey(d); };
+const timeTxt = ms => new Date(ms).toLocaleTimeString('en-IN', {hour: '2-digit', minute: '2-digit'});
+const dateTxt = k => new Date(k + 'T00:00:00').toLocaleDateString('en-IN', {day: '2-digit', month: 'short', year: 'numeric'});
+const sum = (a, f) => r2((a || []).reduce((t, x) => t + num(typeof f === 'function' ? f(x) : x[f]), 0));
+const okSale = s => s.status !== 'void';
+const ls = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} },
+  del(k) { try { localStorage.removeItem(k); } catch (e) {} }
+};
+const INC = n => ({__inc: n});
+const PAY = {cash: 'Cash', upi: 'UPI', credit: 'Credit'};
+const PPAY = {cash: 'Cash', upi: 'UPI', bank: 'Bank'};
+const ROLE = {owner: 'Owner', manager: 'Manager', cashier: 'Cashier'};
+const CATS = {live: 'Live bird', dressed: 'Dressed', cut: 'Cut / special', offal: 'Offal', egg: 'Eggs', other: 'Other'};
+const EXP_CATS = ['Rent', 'Salary', 'Electricity', 'Transport', 'Ice', 'Packaging', 'Gas / Water', 'Tea / Food', 'Maintenance', 'Other'];
+const SEED = [
+  {name: 'Live Chicken', unit: 'kg', cat: 'live', rate: 150, low: 20},
+  {name: 'Chicken (With Skin)', unit: 'kg', cat: 'dressed', rate: 220, low: 5},
+  {name: 'Chicken (Skinless)', unit: 'kg', cat: 'dressed', rate: 260, low: 5},
+  {name: 'Boneless', unit: 'kg', cat: 'cut', rate: 380, low: 2},
+  {name: 'Leg Piece', unit: 'kg', cat: 'cut', rate: 300, low: 2},
+  {name: 'Wings', unit: 'kg', cat: 'cut', rate: 200, low: 1},
+  {name: 'Liver & Gizzard', unit: 'kg', cat: 'offal', rate: 160, low: 1},
+  {name: 'Country Chicken', unit: 'kg', cat: 'live', rate: 450, low: 5},
+  {name: 'Eggs', unit: 'pc', cat: 'egg', rate: 7, low: 30}
+];
+
+function toast(msg, bad) { const t = $('#toast'); t.textContent = msg; t.className = 'show' + (bad ? ' bad' : ''); clearTimeout(t._h); t._h = setTimeout(() => t.className = '', 2800); }
+function sheet(html) {
+  closeSheet();
+  const o = document.createElement('div'); o.className = 'overlay'; o.id = 'ov';
+  o.innerHTML = `<div class="sheet" role="dialog">${html}</div>`;
+  o.addEventListener('click', e => { if (e.target === o) closeSheet(); });
+  document.body.appendChild(o); return o.firstElementChild;
+}
+function closeSheet() { const o = $('#ov'); if (o) o.remove(); }
+function loadScript(src) { return new Promise((res, rej) => { const s = document.createElement('script'); s.src = src; s.onload = res; s.onerror = () => rej(new Error('Could not load ' + src)); document.head.appendChild(s); }); }
+function downloadFile(name, content, type) {
+  const blob = new Blob([content], {type}); const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
+}
+function downloadCSV(name, rows) {
+  const csv = rows.map(r => r.map(v => { const s = String(v ?? ''); return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; }).join(',')).join('\n');
+  downloadFile(name, '﻿' + csv, 'text/csv');
+}
+function deviceCode() { let c = ls.get('rpm_dev', null); if (!c) { c = 'M' + Math.floor(Math.random() * 90 + 10); ls.set('rpm_dev', c); } return c; }
+function nextBillNo() {
+  const d = dayKey(); const s = ls.get('rpm_seq', {}); const n = (s.day === d ? s.n : 0) + 1;
+  ls.set('rpm_seq', {day: d, n});
+  return `${deviceCode()}-${d.slice(2).replace(/-/g, '')}-${String(n).padStart(3, '0')}`;
+}
+function toEmail(u) { u = String(u || '').trim().toLowerCase(); return u.includes('@') ? u : `${u}@${USER_DOMAIN}`; }
+function authMsg(e) {
+  const c = (e && e.code) || '';
+  const m = {
+    'auth/invalid-credential': 'Wrong username or password', 'auth/wrong-password': 'Wrong username or password',
+    'auth/user-not-found': 'Wrong username or password', 'auth/invalid-login-credentials': 'Wrong username or password',
+    'auth/too-many-requests': 'Too many attempts. Please wait a few minutes.',
+    'auth/network-request-failed': 'No internet. The first login on a phone needs internet.',
+    'auth/email-already-in-use': 'That username is already taken', 'auth/weak-password': 'Password must be at least 6 characters',
+    'auth/invalid-email': 'Username can only use letters, numbers, dot, dash or underscore',
+    'auth/requires-recent-login': 'Please sign out and sign in again, then retry',
+    'permission-denied': 'Not allowed. If the shop is already set up, ask the owner for a login.'
+  };
+  return m[c] || (e && e.message) || String(e);
+}
+
+/* ---------- data layer (Firebase or local demo) ---------- */
+let DB, AUTH;
+const CFG = FIREBASE_CONFIG || ls.get('rpm_fbcfg', null);
+const MODE = CFG ? 'fb' : (ls.get('rpm_demo_on', false) ? 'demo' : 'setup');
+
+function makeFB() {
+  firebase.initializeApp(CFG);
+  const db = firebase.firestore();
+  db.enablePersistence({synchronizeTabs: true}).catch(e => console.warn('Offline persistence:', e.code));
+  const FV = firebase.firestore.FieldValue;
+  const conv = o => { const r = {}; for (const [k, v] of Object.entries(o)) r[k] = (v && typeof v === 'object' && '__inc' in v) ? FV.increment(v.__inc) : v; return r; };
+  const q = (col, f = []) => f.reduce((qq, [a, op, v]) => qq.where(a, op, v), db.collection(col));
+  const docs = s => s.docs.map(d => ({id: d.id, ...d.data()}));
+  const onErr = col => e => { console.warn(col, e); if (e.code !== 'cancelled') toast('Sync problem (' + col + '): ' + (e.code || e.message), true); };
+  return {
+    newId: col => db.collection(col || 'x').doc().id,
+    put: (col, id, data, merge) => db.collection(col).doc(id).set(conv(data), {merge: !!merge}),
+    patch: (col, id, data) => db.collection(col).doc(id).update(conv(data)),
+    batch: ops => {
+      const b = db.batch();
+      ops.forEach(o => { const ref = db.collection(o.col).doc(o.id); if (o.type === 'put') b.set(ref, conv(o.data), {merge: !!o.merge}); else b.update(ref, conv(o.data)); });
+      return b.commit();
+    },
+    watch: (col, f, cb) => q(col, f).onSnapshot({includeMetadataChanges: true}, s => cb(docs(s), s.docs.filter(d => d.metadata.hasPendingWrites).length), onErr(col)),
+    watchDoc: (col, id, cb) => db.collection(col).doc(id).onSnapshot(d => cb(d.exists ? {id: d.id, ...d.data()} : null, d.metadata.fromCache), onErr(col)),
+    fetch: (col, f) => q(col, f).get().then(docs),
+    getDoc: (col, id) => db.collection(col).doc(id).get().then(d => d.exists ? {id: d.id, ...d.data()} : null)
+  };
+}
+
+function makeDemo() {
+  let data = ls.get('rpm_demo', {});
+  const subs = new Set();
+  const persist = () => { ls.set('rpm_demo', data); subs.forEach(s => { try { s(); } catch (e) { console.error(e); } }); };
+  const coll = c => (data[c] = data[c] || {});
+  const apply = (old, o) => { const r = {...(old || {})}; for (const [k, v] of Object.entries(o)) r[k] = (v && typeof v === 'object' && '__inc' in v) ? r3(num(r[k]) + v.__inc) : v; return r; };
+  const ok = (d, f = []) => f.every(([a, op, v]) => op === '==' ? d[a] === v : op === '>=' ? d[a] >= v : op === '<=' ? d[a] <= v : true);
+  const list = (c, f) => Object.entries(coll(c)).map(([id, d]) => ({id, ...d})).filter(d => ok(d, f));
+  const write = o => { const c = coll(o.col); if (o.type === 'put') c[o.id] = o.merge ? apply(c[o.id], o.data) : apply({}, o.data); else { if (!c[o.id]) throw new Error('Record not found'); c[o.id] = apply(c[o.id], o.data); } };
+  return {
+    newId: () => Date.now().toString(36) + Math.random().toString(36).slice(2, 8),
+    put: (col, id, d, merge) => { write({type: 'put', col, id, data: d, merge}); persist(); return Promise.resolve(); },
+    patch: (col, id, d) => { try { write({type: 'patch', col, id, data: d}); } catch (e) { return Promise.reject(e); } persist(); return Promise.resolve(); },
+    batch: ops => { try { ops.forEach(write); } catch (e) { return Promise.reject(e); } persist(); return Promise.resolve(); },
+    watch: (col, f, cb) => { const run = () => cb(list(col, f), 0); subs.add(run); setTimeout(run); return () => subs.delete(run); },
+    watchDoc: (col, id, cb) => { const run = () => { const d = coll(col)[id]; cb(d ? {id, ...d} : null); }; subs.add(run); setTimeout(run); return () => subs.delete(run); },
+    fetch: (col, f) => Promise.resolve(list(col, f)),
+    getDoc: (col, id) => { const d = coll(col)[id]; return Promise.resolve(d ? {id, ...d} : null); },
+    raw: () => data,
+    reset: () => { data = {}; ls.set('rpm_demo', data); }
+  };
+}
+
+function seedOps(withStock) {
+  const st = {live: 45, dressed: 10, cut: 3, offal: 2, egg: 120};
+  return SEED.map((p, i) => ({type: 'put', col: 'products', id: DB.newId('products'),
+    data: {...p, sort: i + 1, active: true, stock: withStock ? (p.name === 'Country Chicken' ? 6 : st[p.cat] || 0) : 0, createdAt: Date.now()}}));
+}
+
+function makeFBAuth() {
+  const auth = firebase.auth();
+  return {
+    onChange: cb => auth.onAuthStateChanged(u => cb(u ? {uid: u.uid} : null)),
+    login: (u, pw) => auth.signInWithEmailAndPassword(toEmail(u), pw),
+    logout: () => auth.signOut(),
+    async signupOwner({shop, name, user, pw}) {
+      S.signingUp = true;
+      const cred = await auth.createUserWithEmailAndPassword(toEmail(user), pw);
+      const uid = cred.user.uid;
+      try {
+        await DB.batch([
+          {type: 'put', col: 'meta', id: 'shop', data: {name: shop, ownerUid: uid, footer: 'Thank you! Visit again', createdAt: Date.now()}},
+          {type: 'put', col: 'users', id: uid, data: {name, username: user.toLowerCase(), role: 'owner', active: true, createdAt: Date.now()}}
+        ]);
+      } catch (e) { S.signingUp = false; await cred.user.delete().catch(() => {}); throw e; }
+      await DB.batch(seedOps(false)).catch(e => console.warn('seed', e));
+      S.signingUp = false;
+    },
+    async createStaff({name, user, pw, role}) {
+      const sec = firebase.apps.find(a => a.name === 'staff') || firebase.initializeApp(CFG, 'staff');
+      const sa = sec.auth();
+      await sa.setPersistence(firebase.auth.Auth.Persistence.NONE);
+      const cred = await sa.createUserWithEmailAndPassword(toEmail(user), pw);
+      try { await DB.put('users', cred.user.uid, {name, username: user.toLowerCase(), role, active: true, createdAt: Date.now(), createdBy: S.me.uid}); }
+      finally { await sa.signOut().catch(() => {}); }
+    },
+    async changePassword(oldPw, newPw) {
+      const u = auth.currentUser;
+      await u.reauthenticateWithCredential(firebase.auth.EmailAuthProvider.credential(u.email, oldPw));
+      await u.updatePassword(newPw);
+    }
+  };
+}
+
+function makeDemoAuth() {
+  let cb = () => {};
+  if (!DB.raw().meta) {
+    DB.batch([
+      {type: 'put', col: 'meta', id: 'shop', data: {name: 'Demo Chicken Centre', address: '12, Main Road, Chennai', phone: '98400 00000', footer: 'Thank you! Visit again', ownerUid: 'u-owner'}},
+      {type: 'put', col: 'users', id: 'u-owner', data: {name: 'Owner', username: 'owner', role: 'owner', active: true}},
+      {type: 'put', col: 'users', id: 'u-mgr', data: {name: 'Manager', username: 'manager', role: 'manager', active: true}},
+      {type: 'put', col: 'users', id: 'u-cash', data: {name: 'Ravi (Cashier)', username: 'ravi', role: 'cashier', active: true}},
+      ...seedOps(true)
+    ]);
+  }
+  return {
+    onChange: f => { cb = f; const u = ls.get('rpm_demo_uid', null); setTimeout(() => f(u ? {uid: u} : null)); },
+    loginAs: uid => { ls.set('rpm_demo_uid', uid); cb({uid}); },
+    logout: () => { ls.del('rpm_demo_uid'); cb(null); return Promise.resolve(); },
+    createStaff: ({name, user, role}) => DB.put('users', 'u-' + DB.newId(), {name, username: user.toLowerCase(), role, active: true, createdAt: Date.now()}),
+    changePassword: () => Promise.reject(new Error('Not available in demo mode'))
+  };
+}
+
+/* ---------- state & session ---------- */
+const S = {me: null, shop: {}, products: [], sales: [], purchases: [], expenses: [], pend: {}, cart: [], disc: '', pay: 'cash', cust: {name: '', phone: ''}, day: dayKey(), route: 'home'};
+const can = {mgr: () => ['owner', 'manager'].includes(S.me && S.me.role), owner: () => (S.me && S.me.role) === 'owner'};
+let unsubs = [], dayUnsubs = [], viewUnsubs = [], V = {};
+
+function stopWatches() { [...unsubs, ...dayUnsubs, ...viewUnsubs].forEach(u => { try { u(); } catch (e) {} }); unsubs = []; dayUnsubs = []; viewUnsubs = []; }
+
+function startSession(u) {
+  stopWatches(); S.me = null;
+  if (!u) { S.uid = null; return vLogin(); }
+  S.uid = u.uid;
+  const cached = ls.get('rpm_me_' + u.uid, null);
+  if (cached && cached.active !== false) { S.me = cached; startData(); }
+  else showMsg(S.signingUp ? 'Setting up your shop…' : 'Loading your account…');
+  unsubs.push(DB.watchDoc('users', u.uid, p => {
+    if (!p) {
+      if (S.signingUp || S.me) return;
+      return showMsg('This login is not registered as shop staff. Ask the owner to add you.', true);
+    }
+    if (p.active === false) { ls.del('rpm_me_' + u.uid); toast('Your login has been disabled by the owner', true); AUTH.logout(); return; }
+    const first = !S.me; const roleChanged = S.me && S.me.role !== p.role;
+    S.me = {uid: u.uid, ...p}; ls.set('rpm_me_' + u.uid, S.me);
+    if (first) startData(); else if (roleChanged) { subscribeDay(); go(); }
+  }));
+}
+
+function startData() {
+  S.day = dayKey();
+  unsubs.push(DB.watchDoc('meta', 'shop', d => { S.shop = d || {}; onData(); }));
+  unsubs.push(DB.watch('products', [], d => { S.products = d.sort((a, b) => (num(a.sort) - num(b.sort)) || String(a.name).localeCompare(b.name)); onData(); }));
+  subscribeDay();
+  $('#top').classList.remove('hidden'); $('#nav').classList.remove('hidden');
+  go();
+}
+
+function subscribeDay() {
+  dayUnsubs.forEach(u => { try { u(); } catch (e) {} }); dayUnsubs = []; S.pend = {}; S.purchases = []; S.expenses = [];
+  const f = [['day', '==', S.day]];
+  dayUnsubs.push(DB.watch('sales', f, (d, p) => { S.sales = d.sort((a, b) => b.at - a.at); S.pend.sales = p; onData(); }));
+  if (can.mgr()) {
+    dayUnsubs.push(DB.watch('purchases', f, (d, p) => { S.purchases = d.sort((a, b) => b.at - a.at); S.pend.purchases = p; onData(); }));
+    dayUnsubs.push(DB.watch('expenses', f, (d, p) => { S.expenses = d.sort((a, b) => b.at - a.at); S.pend.expenses = p; onData(); }));
+  }
+}
+setInterval(() => { if (S.me && dayKey() !== S.day) { S.day = dayKey(); subscribeDay(); go(); } }, 60000);
+
+function pendingCount() { return Object.values(S.pend).reduce((a, b) => a + (b || 0), 0); }
+function onData() { updateHeader(); if (V && V.update) { try { V.update(); } catch (e) { console.error(e); } } }
+function updateHeader() {
+  const n = $('#net'); if (!n) return;
+  const p = pendingCount();
+  if (MODE === 'demo') { n.textContent = 'Demo'; n.className = 'net'; }
+  else if (!navigator.onLine) { n.textContent = '● Offline' + (p ? ` · ${p} to sync` : ''); n.className = 'net off'; }
+  else { n.textContent = p ? `⟳ Syncing ${p}` : '● Online'; n.className = 'net'; }
+  $('#shopName').innerHTML = esc(S.shop.name || 'RetailPro Mini') + `<small>${esc((ROUTES[S.route] || {}).title || '')}</small>`;
+  $('#back').classList.toggle('hidden', TABS.includes(S.route));
+}
+addEventListener('online', updateHeader); addEventListener('offline', updateHeader);
+
+function showMsg(msg, withLogout) {
+  $('#top').classList.add('hidden'); $('#nav').classList.add('hidden');
+  $('#view').innerHTML = `<div class="login card center"><div class="logo">🐔</div><p>${esc(msg)}</p>${withLogout ? '<button class="btn" id="lo">Sign out</button>' : ''}</div>`;
+  if (withLogout) $('#lo').onclick = () => AUTH.logout();
+}
+
+async function signOut() {
+  const p = pendingCount();
+  if (p) return toast(`${p} record(s) not synced yet. Connect to internet before signing out.`, true);
+  if (!confirm('Sign out from this phone?')) return;
+  ls.del('rpm_me_' + S.uid); S.cart = [];
+  $('#top').classList.add('hidden'); $('#nav').classList.add('hidden');
+  await AUTH.logout();
+}
+
+/* ---------- router ---------- */
+const TABS = ['home', 'sale', 'stock', 'bills', 'more'];
+const ROUTES = {
+  home: {title: 'Home', render: vHome},
+  sale: {title: 'New Sale', render: vSale},
+  stock: {title: 'Stock', render: vStock},
+  bills: {title: 'Bills', render: vBills},
+  more: {title: 'More', render: vMore},
+  purchase: {title: 'Purchase / Add stock', render: vPurchase, need: () => can.mgr()},
+  process: {title: 'Processing', render: vProcess, need: () => can.mgr()},
+  expense: {title: 'Expenses', render: vExpense, need: () => can.mgr()},
+  rates: {title: "Today's rates & products", render: vRates, need: () => can.mgr()},
+  reports: {title: 'Reports', render: vReports, need: () => can.mgr()},
+  closing: {title: 'Day closing', render: vClosing, need: () => can.mgr()},
+  staff: {title: 'Staff & logins', render: vStaff, need: () => can.owner()},
+  settings: {title: 'Settings', render: vSettings}
+};
+function go() {
+  if (!S.me) return;
+  closeSheet();
+  viewUnsubs.forEach(u => { try { u(); } catch (e) {} }); viewUnsubs = [];
+  let r = (location.hash.slice(1) || 'home').split('?')[0];
+  if (!ROUTES[r] || (ROUTES[r].need && !ROUTES[r].need())) r = 'home';
+  S.route = r; renderNav(); updateHeader();
+  const view = $('#view'); view.innerHTML = ''; scrollTo(0, 0);
+  V = ROUTES[r].render(view) || {};
+}
+addEventListener('hashchange', go);
+$('#back').onclick = () => history.length > 1 ? history.back() : (location.hash = '#home');
+function renderNav() {
+  const items = [['home', '🏠', 'Home'], ['sale', '🧾', 'Sale'], ['stock', '📦', 'Stock'], ['bills', '📜', 'Bills'], ['more', '☰', 'More']];
+  $('#nav').innerHTML = items.map(([r, i, t]) => `<a href="#${r}" class="${S.route === r ? 'on' : ''}"><i>${i}</i>${t}</a>`).join('');
+}
+
+/* ---------- setup & login ---------- */
+function vSetup() {
+  $('#view').innerHTML = `<div class="login">
+    <div class="center"><div class="logo">🐔</div><h2>RetailPro Mini</h2><p class="muted">Simple chicken shop billing &amp; stock</p></div>
+    <div class="card"><h3>Connect your Firebase project</h3>
+      <p class="muted" style="font-size:14px">Firebase console → Project settings → Your apps → Web app → copy the <b>firebaseConfig</b> object and paste it here.</p>
+      <textarea id="cfg" placeholder='{ apiKey: "...", authDomain: "...", projectId: "...", appId: "..." }'></textarea>
+      <button class="btn primary big" id="saveCfg">Connect</button></div>
+    <div class="card"><h3>Just trying it out?</h3><p class="muted" style="font-size:14px">Demo mode keeps data only on this phone, with sample products and three test logins.</p>
+      <button class="btn full" id="demo">Start demo mode</button></div></div>`;
+  $('#saveCfg').onclick = () => {
+    let t = $('#cfg').value.trim();
+    const m = t.match(/\{[\s\S]*\}/); if (!m) return toast('Paste the { ... } config object', true);
+    t = m[0].replace(/\/\/.*$/gm, '').replace(/([{,]\s*)([A-Za-z0-9_]+)\s*:/g, '$1"$2":').replace(/'/g, '"').replace(/,\s*}/g, '}');
+    let c; try { c = JSON.parse(t); } catch (e) { return toast('Could not read that config. Check it and try again.', true); }
+    if (!c.apiKey || !c.projectId) return toast('Config must include apiKey and projectId', true);
+    ls.set('rpm_fbcfg', c); location.reload();
+  };
+  $('#demo').onclick = () => { ls.set('rpm_demo_on', true); location.reload(); };
+}
+
+function vLogin() {
+  S.route = 'login'; V = {};
+  $('#top').classList.add('hidden'); $('#nav').classList.add('hidden');
+  const view = $('#view');
+  if (MODE === 'demo') {
+    const users = Object.entries(DB.raw().users || {}).filter(([, u]) => u.active !== false);
+    view.innerHTML = `<div class="login"><div class="center"><div class="logo">🐔</div><h2>${esc((DB.raw().meta || {}).shop?.name || 'RetailPro Mini')}</h2><p class="muted">Demo mode · choose who is using this phone</p></div>
+      <div class="card">${users.map(([id, u]) => `<button class="btn full" style="margin-bottom:10px;justify-content:space-between" data-u="${esc(id)}"><span>${esc(u.name)}</span><span class="badge p">${ROLE[u.role]}</span></button>`).join('')}</div>
+      <button class="btn ghost" id="exitDemo">Exit demo &amp; connect Firebase</button></div>`;
+    $$('[data-u]').forEach(b => b.onclick = () => AUTH.loginAs(b.dataset.u));
+    $('#exitDemo').onclick = () => { ls.del('rpm_demo_on'); location.reload(); };
+    return;
+  }
+  view.innerHTML = `<div class="login"><div class="center"><div class="logo">🐔</div><h2>RetailPro Mini</h2><p class="muted">Sign in to start billing</p></div>
+    <form class="card" id="lf"><label class="field"><span>Username</span><input id="lu" autocomplete="username" autocapitalize="none" required></label>
+      <label class="field"><span>Password</span><input id="lp" type="password" autocomplete="current-password" required></label>
+      <button class="btn primary big" id="lb">Sign in</button></form>
+    <button class="btn ghost" id="newShop">First time? Set up a new shop (owner)</button>
+    ${FIREBASE_CONFIG ? '' : '<button class="btn ghost" id="discon" style="font-size:13px">Change Firebase project</button>'}</div>`;
+  $('#lf').onsubmit = async e => {
+    e.preventDefault(); const b = $('#lb'); b.disabled = true; b.textContent = 'Signing in…';
+    try { await AUTH.login($('#lu').value, $('#lp').value); } catch (er) { toast(authMsg(er), true); b.disabled = false; b.textContent = 'Sign in'; }
+  };
+  $('#newShop').onclick = vSignup;
+  if ($('#discon')) $('#discon').onclick = () => { if (confirm('Disconnect this phone from the Firebase project?')) { ls.del('rpm_fbcfg'); location.reload(); } };
+}
+
+function vSignup() {
+  $('#view').innerHTML = `<div class="login"><div class="center"><div class="logo">🐔</div><h2>Set up your shop</h2><p class="muted">Do this once, on the owner's phone. Staff logins are added later.</p></div>
+    <form class="card" id="sf"><label class="field"><span>Shop name</span><input id="sn" required placeholder="e.g. Sri Balaji Chicken Centre"></label>
+      <label class="field"><span>Your name</span><input id="on" required></label>
+      <label class="field"><span>Choose a username</span><input id="ou" required autocapitalize="none" pattern="[A-Za-z0-9._\\-]{3,20}" placeholder="e.g. owner"></label>
+      <label class="field"><span>Password (min 6 characters)</span><input id="op" type="password" minlength="6" required></label>
+      <button class="btn primary big" id="sb">Create shop</button></form>
+    <button class="btn ghost" id="bk">Back to sign in</button></div>`;
+  $('#bk').onclick = vLogin;
+  $('#sf').onsubmit = async e => {
+    e.preventDefault(); const b = $('#sb'); b.disabled = true; b.textContent = 'Creating…';
+    try { await AUTH.signupOwner({shop: $('#sn').value.trim(), name: $('#on').value.trim(), user: $('#ou').value.trim(), pw: $('#op').value}); toast('Shop created'); }
+    catch (er) { toast(authMsg(er), true); b.disabled = false; b.textContent = 'Create shop'; if (firebase.auth().currentUser) AUTH.logout(); }
+  };
+}
+
+/* ---------- HOME ---------- */
+const kpi = (l, v, s, hl) => `<div class="kpi ${hl ? 'hl' : ''}"><span>${l}</span><b>${v}</b><small>${s || '&nbsp;'}</small></div>`;
+const action = (h, i, t, s, p) => `<a class="action ${p ? 'primary' : ''}" href="${h}"><i>${i}</i><div><b>${t}</b><small>${s}</small></div></a>`;
+function vHome(view) {
+  const draw = () => {
+    const all = S.sales, sales = all.filter(okSale);
+    const mine = sales.filter(s => s.byUid === S.me.uid);
+    const tot = sum(sales, 'total');
+    const kgSold = sales.reduce((a, s) => a + s.items.filter(i => i.unit === 'kg').reduce((b, i) => b + num(i.qty), 0), 0);
+    const act = S.products.filter(p => p.active !== false);
+    const stockKg = act.filter(p => p.unit === 'kg').reduce((a, p) => a + num(p.stock), 0);
+    const neg = act.filter(p => num(p.stock) < 0);
+    const low = act.filter(p => num(p.stock) >= 0 && num(p.low) > 0 && num(p.stock) <= num(p.low));
+    const byPay = m => sum(sales.filter(s => s.pay === m), 'total');
+    let k4;
+    if (can.mgr()) { const pur = sum(S.purchases, 'amount'), exp = sum(S.expenses, 'amount'); k4 = kpi('Est. profit', money(tot - pur - exp), 'sales − purchases − expenses'); }
+    else k4 = kpi('My bills today', mine.length, money(sum(mine, 'total')));
+    view.innerHTML = `
+      <div class="row between" style="margin-bottom:10px"><div>Hello, <b>${esc(S.me.name)}</b> <span class="badge p">${ROLE[S.me.role]}</span></div><span class="muted" style="font-size:13px">${dateTxt(S.day)}</span></div>
+      <div class="kpis">${kpi("Today's sales", money(tot), pl(sales.length, 'bill'), true)}${kpi('Sold', r3(kgSold).toFixed(1) + ' kg', 'by weight')}${kpi('Stock on hand', r3(stockKg).toFixed(1) + ' kg', act.length + ' items')}${k4}</div>
+      ${pendingCount() ? `<div class="alert info">⟳ ${pendingCount()} record(s) saved on this phone, waiting for internet to sync.</div>` : ''}
+      ${neg.length ? `<div class="alert bad">⚠ Stock difference: ${neg.map(p => `${esc(p.name)} (${qtyTxt(p.stock, p.unit)})`).join(', ')}. More was sold than recorded stock — check purchases or recount.</div>` : ''}
+      ${low.length ? `<div class="alert warn">Low stock: ${low.map(p => `${esc(p.name)} (${qtyTxt(p.stock, p.unit)})`).join(', ')}</div>` : ''}
+      <div class="sec">Quick actions</div>
+      <div class="actions">
+        ${action('#sale', '🧾', 'New Sale', 'Quick billing', 1)}
+        ${can.mgr() ? action('#purchase', '🚚', 'Add Stock', 'Purchase entry') + action('#process', '⚖️', 'Processing', 'Weight & yield') + action('#expense', '💸', 'Expenses', 'Daily spending') + action('#rates', '🏷️', "Today's Rates", 'Update prices') + action('#reports', '📊', 'Reports', 'Sales & profit') + action('#closing', '🔒', 'Day Closing', 'Cash tally') + action('#bills', '📜', 'Bills', 'History & void')
+          : action('#bills', '📜', 'My Bills', 'Today') + action('#stock', '📦', 'Stock', 'Available now')}
+      </div>
+      <div class="sec">Today by payment</div>
+      <div class="card"><div class="row between"><span>Cash</span><b>${money(byPay('cash'))}</b></div><div class="row between" style="margin-top:6px"><span>UPI</span><b>${money(byPay('upi'))}</b></div><div class="row between" style="margin-top:6px"><span>Credit</span><b>${money(byPay('credit'))}</b></div></div>`;
+  };
+  draw(); return {update: draw};
+}
+
+/* ---------- SALE ---------- */
+function vSale(view) {
+  view.innerHTML = `<div class="tiles" id="tiles"></div><div class="card" id="cart"></div>`;
+  drawTiles(); drawCart();
+  return {update: drawTiles};
+}
+function drawTiles() {
+  const el = $('#tiles'); if (!el) return;
+  const ps = S.products.filter(p => p.active !== false);
+  el.innerHTML = ps.length ? ps.map(p => `<button class="tile ${num(p.stock) <= 0 ? 'out' : ''}" data-id="${esc(p.id)}"><b>${esc(p.name)}</b><span class="rate">${money(p.rate)}/${esc(p.unit)}</span><small>${num(p.stock) <= 0 ? 'No stock · ' : ''}${qtyTxt(p.stock, p.unit)}</small></button>`).join('')
+    : `<p class="muted">No products yet. ${can.mgr() ? 'Add them in <a href="#rates">Rates</a>.' : 'Ask the owner to add products.'}</p>`;
+  $$('.tile', el).forEach(b => b.onclick = () => openItemSheet(b.dataset.id));
+}
+function openItemSheet(pid) {
+  const p = S.products.find(x => x.id === pid); if (!p) return;
+  const isKg = p.unit === 'kg'; let mode = 'qty';
+  const canRate = can.mgr() || !!S.shop.cashierRateEdit;
+  sheet(`<div class="row between"><h3 style="margin:0">${esc(p.name)}</h3><span class="muted">${qtyTxt(p.stock, p.unit)} in stock</span></div><div style="height:12px"></div>
+    ${isKg ? '<div class="seg" id="mseg"><button data-m="qty" class="on">By weight (kg)</button><button data-m="amt">By amount (₹)</button></div>' : ''}
+    <label class="field"><span id="lblIn">${isKg ? 'Weight in kg' : 'Quantity'}</span><input id="inV" inputmode="decimal" autocomplete="off" placeholder="0" style="font-size:24px;font-weight:700"></label>
+    <div class="chips" id="chips"></div>
+    <label class="field"><span>Rate per ${esc(p.unit)} ${canRate ? '' : '(fixed by manager)'}</span><input id="inR" inputmode="decimal" value="${num(p.rate)}" ${canRate ? '' : 'readonly'}></label>
+    <div class="calc" id="calc">&nbsp;</div>
+    <button class="btn primary big" id="addBtn">Add to bill</button>`);
+  const chipsFor = () => mode === 'amt' ? [50, 100, 150, 200, 250, 300, 500] : isKg ? [0.25, 0.5, 0.75, 1, 1.5, 2, 3] : [1, 2, 6, 10, 12, 30];
+  const calc = () => {
+    const v = num($('#inV').value), r = num($('#inR').value); let q, a;
+    if (mode === 'amt') { a = r2(v); q = r > 0 ? r3(v / r) : 0; } else { q = r3(v); a = r2(q * r); }
+    $('#calc').innerHTML = q > 0 && r > 0 ? `${qtyTxt(q, p.unit)} × ${money(r)} = <b>${money(a)}</b>` : '&nbsp;';
+    return {q, a, r};
+  };
+  const drawChips = () => {
+    $('#chips').innerHTML = chipsFor().map(c => `<button class="chip" data-v="${c}">${mode === 'amt' ? '₹' + c : c + (isKg ? ' kg' : '')}</button>`).join('');
+    $$('#chips .chip').forEach(b => b.onclick = () => { $('#inV').value = b.dataset.v; calc(); });
+  };
+  if (isKg) $$('#mseg button').forEach(b => b.onclick = () => {
+    mode = b.dataset.m; $$('#mseg button').forEach(x => x.classList.toggle('on', x === b));
+    $('#lblIn').textContent = mode === 'amt' ? 'Amount customer wants (₹)' : 'Weight in kg'; $('#inV').value = ''; drawChips(); calc(); $('#inV').focus();
+  });
+  const add = () => {
+    const {q, a, r} = calc();
+    if (!(q > 0) || !(r > 0)) return toast(isKg ? 'Enter the weight' : 'Enter the quantity', true);
+    S.cart.push({pid: p.id, name: p.name, unit: p.unit, qty: q, rate: r2(r), amount: a});
+    closeSheet(); drawCart();
+  };
+  $('#inV').oninput = calc; $('#inR').oninput = calc;
+  $('#inV').onkeydown = e => { if (e.key === 'Enter') add(); };
+  $('#addBtn').onclick = add;
+  drawChips(); setTimeout(() => { const i = $('#inV'); if (i) i.focus(); }, 60);
+}
+function cartTotals() { const sub = r2(S.cart.reduce((a, i) => a + i.amount, 0)); const disc = Math.min(Math.max(num(S.disc), 0), sub); return {sub, disc: r2(disc), total: r2(sub - disc)}; }
+function drawCart() {
+  const el = $('#cart'); if (!el) return;
+  if (!S.cart.length) { el.innerHTML = '<p class="muted center" style="margin:6px 0">Tap a product above to start a bill</p>'; return; }
+  const t = cartTotals();
+  el.innerHTML = `<div>${S.cart.map((i, ix) => `<div class="line"><div><b>${esc(i.name)}</b><small>${qtyTxt(i.qty, i.unit)} × ${money(i.rate)}</small></div><div class="amt">${money(i.amount)}</div><button class="x" data-ix="${ix}" aria-label="Remove">✕</button></div>`).join('')}</div>
+    <div class="row between" style="margin-top:8px"><span>Subtotal</span><b>${money(t.sub)}</b></div>
+    <div class="row between" style="margin-top:6px"><label for="disc">Discount / round-off ₹</label><input id="disc" class="small" inputmode="decimal" value="${esc(S.disc)}" placeholder="0"></div>
+    <div class="row between grand"><span>Total</span><b id="gt">${money(t.total)}</b></div>
+    <div class="seg" id="pseg">${Object.keys(PAY).map(m => `<button data-pay="${m}" class="${S.pay === m ? 'on' : ''}">${PAY[m]}</button>`).join('')}</div>
+    <div class="grid2"><label class="field"><span>Customer ${S.pay === 'credit' ? '(required)' : '(optional)'}</span><input id="cn" value="${esc(S.cust.name)}" autocomplete="off"></label>
+      <label class="field"><span>Mobile (optional)</span><input id="cp" inputmode="tel" value="${esc(S.cust.phone)}" autocomplete="off"></label></div>
+    <button class="btn primary big" id="saveBill">Save bill · ${money(t.total)}</button>
+    <button class="btn ghost" id="clearBill">Clear bill</button>`;
+  $$('.x', el).forEach(b => b.onclick = () => { S.cart.splice(+b.dataset.ix, 1); drawCart(); });
+  $('#disc').oninput = e => { S.disc = e.target.value; const t2 = cartTotals(); $('#gt').textContent = money(t2.total); $('#saveBill').textContent = 'Save bill · ' + money(t2.total); };
+  $$('#pseg button').forEach(b => b.onclick = () => { S.pay = b.dataset.pay; drawCart(); });
+  $('#cn').oninput = e => S.cust.name = e.target.value; $('#cp').oninput = e => S.cust.phone = e.target.value;
+  $('#clearBill').onclick = () => { if (confirm('Clear this bill?')) { S.cart = []; S.disc = ''; S.cust = {name: '', phone: ''}; S.pay = 'cash'; drawCart(); } };
+  $('#saveBill').onclick = saveBill;
+}
+function saveBill() {
+  if (!S.cart.length) return;
+  if (S.pay === 'credit' && !S.cust.name.trim()) return toast('Enter the customer name for a credit sale', true);
+  const t = cartTotals(); const now = Date.now(); const id = DB.newId('sales');
+  const bill = {billNo: nextBillNo(), day: dayKey(new Date(now)), at: now, items: S.cart.map(i => ({...i})), subtotal: t.sub, discount: t.disc, total: t.total,
+    pay: S.pay, customer: S.cust.name.trim(), phone: S.cust.phone.trim(), byUid: S.me.uid, byName: S.me.name, device: deviceCode(), status: 'ok'};
+  const qty = {}; bill.items.forEach(i => qty[i.pid] = r3((qty[i.pid] || 0) + i.qty));
+  const ops = [{type: 'put', col: 'sales', id, data: bill}, ...Object.entries(qty).map(([pid, q]) => ({type: 'patch', col: 'products', id: pid, data: {stock: INC(-q)}}))];
+  // local safety copy of every bill on this phone (last 500)
+  const log = ls.get('rpm_billlog', []); log.push({id, ...bill}); ls.set('rpm_billlog', log.slice(-500));
+  DB.batch(ops).catch(e => toast('Bill ' + bill.billNo + ' could not sync: ' + authMsg(e), true));
+  S.cart = []; S.disc = ''; S.cust = {name: '', phone: ''}; S.pay = 'cash';
+  drawCart(); showReceipt({id, ...bill}); toast('Bill saved');
+}
+
+/* ---------- receipt / print / share ---------- */
+function receiptHTML(b) {
+  const sh = S.shop || {};
+  return `<div class="receipt">
+    <div class="c big">${esc(sh.name || 'RetailPro Mini')}</div>
+    ${sh.address ? `<div class="c">${esc(sh.address)}</div>` : ''}${sh.phone ? `<div class="c">Ph: ${esc(sh.phone)}</div>` : ''}${sh.gstin ? `<div class="c">GSTIN: ${esc(sh.gstin)}</div>` : ''}
+    <hr><div class="r"><span>Bill: ${esc(b.billNo)}</span><span>${new Date(b.at).toLocaleDateString('en-IN')}</span></div>
+    <div class="r"><span>By: ${esc(b.byName)}</span><span>${timeTxt(b.at)}</span></div>
+    ${b.customer ? `<div>Customer: ${esc(b.customer)}${b.phone ? ' · ' + esc(b.phone) : ''}</div>` : ''}<hr>
+    ${b.items.map(i => `<div>${esc(i.name)}</div><div class="r"><span>&nbsp;${qtyTxt(i.qty, i.unit)} × ${r2(i.rate)}</span><span>${r2(i.amount).toFixed(2)}</span></div>`).join('')}
+    <hr><div class="r"><span>Subtotal</span><span>${r2(b.subtotal).toFixed(2)}</span></div>
+    ${b.discount ? `<div class="r"><span>Discount</span><span>-${r2(b.discount).toFixed(2)}</span></div>` : ''}
+    <div class="r big"><span>TOTAL</span><span>₹${r2(b.total).toFixed(2)}</span></div>
+    <div class="r"><span>Paid by</span><span>${PAY[b.pay] || b.pay}</span></div>
+    ${b.status === 'void' ? `<hr><div class="void-stamp">VOID</div><div class="c">${esc(b.voidReason || '')}</div>` : ''}
+    <hr><div class="c">${esc(sh.footer || 'Thank you! Visit again')}</div></div>`;
+}
+function billText(b) {
+  const L = [`*${S.shop.name || 'RetailPro Mini'}*`, `Bill ${b.billNo} · ${new Date(b.at).toLocaleString('en-IN')}`, ''];
+  b.items.forEach(i => L.push(`${i.name}: ${qtyTxt(i.qty, i.unit)} × ₹${r2(i.rate)} = ₹${r2(i.amount)}`));
+  if (b.discount) L.push(`Discount: -₹${r2(b.discount)}`);
+  L.push(`*Total: ₹${r2(b.total)}* (${PAY[b.pay]})`, '', S.shop.footer || 'Thank you! Visit again');
+  return L.join('\n');
+}
+function printHTML(html, wide) {
+  const pa = $('#printArea'); pa.className = wide ? 'wide' : ''; pa.innerHTML = html;
+  document.documentElement.style.setProperty('--paper', (ls.get('rpm_paper', 58)) + 'mm');
+  setTimeout(() => window.print(), 50);
+}
+function showReceipt(b, fromHistory) {
+  const phone = String(b.phone || '').replace(/\D/g, '').slice(-10);
+  sheet(`${receiptHTML(b)}
+    <div class="row gap"><button class="btn" id="rpPrint">🖨️ Print</button><button class="btn" id="rpShare">📤 Share</button>${phone.length === 10 ? '<button class="btn" id="rpWa">WhatsApp</button>' : ''}</div>
+    ${fromHistory && can.mgr() && b.status !== 'void' ? '<button class="btn danger full" style="margin-top:10px" id="rpVoid">Void this bill</button>' : ''}
+    <button class="btn primary big" id="rpNew">${fromHistory ? 'Close' : 'New sale'}</button>`);
+  $('#rpPrint').onclick = () => printHTML(receiptHTML(b));
+  $('#rpShare').onclick = () => { const t = billText(b); if (navigator.share) navigator.share({text: t}).catch(() => {}); else open('https://wa.me/?text=' + encodeURIComponent(t)); };
+  if ($('#rpWa')) $('#rpWa').onclick = () => open(`https://wa.me/91${phone}?text=` + encodeURIComponent(billText(b)));
+  if ($('#rpVoid')) $('#rpVoid').onclick = () => voidBill(b);
+  $('#rpNew').onclick = closeSheet;
+}
+function voidBill(b) {
+  sheet(`<h3>Void bill ${esc(b.billNo)}?</h3><p class="muted">The bill stays in history marked VOID and its stock (${b.items.map(i => qtyTxt(i.qty, i.unit) + ' ' + esc(i.name)).join(', ')}) is added back.</p>
+    <label class="field"><span>Reason</span><input id="vr" placeholder="e.g. wrong weight entered"></label>
+    <div class="row gap"><button class="btn" id="vc">Cancel</button><button class="btn primary" id="vk" style="background:var(--bad);border-color:var(--bad)">Void bill</button></div>`);
+  $('#vc').onclick = closeSheet;
+  $('#vk').onclick = () => {
+    const reason = $('#vr').value.trim(); if (!reason) return toast('Enter a reason', true);
+    const qty = {}; b.items.forEach(i => qty[i.pid] = r3((qty[i.pid] || 0) + i.qty));
+    const ops = [{type: 'patch', col: 'sales', id: b.id, data: {status: 'void', voidReason: reason, voidBy: S.me.name, voidAt: Date.now()}},
+      ...Object.entries(qty).filter(([pid]) => S.products.some(p => p.id === pid)).map(([pid, q]) => ({type: 'patch', col: 'products', id: pid, data: {stock: INC(q)}}))];
+    DB.batch(ops).catch(e => toast('Void failed: ' + authMsg(e), true));
+    closeSheet(); toast('Bill voided'); if (V.reload) V.reload();
+  };
+}
+
+/* ---------- STOCK ---------- */
+function vStock(view) {
+  const draw = () => {
+    const ps = S.products.filter(p => p.active !== false);
+    view.innerHTML = `<h2>Available stock</h2><div class="card list">${ps.map(p => {
+      const s = num(p.stock), st = s < 0 ? '<span class="badge bad">Check count</span>' : s === 0 ? '<span class="badge bad">Out</span>' : (num(p.low) && s <= num(p.low)) ? '<span class="badge warn">Low</span>' : '';
+      return `<div class="item"><div class="main"><b>${esc(p.name)}</b> ${st}<small>${CATS[p.cat] || ''} · ${money(p.rate)}/${esc(p.unit)}</small></div><div class="val ${s < 0 ? 'bad' : ''}">${qtyTxt(s, p.unit)}</div>${can.mgr() ? `<button class="btn sm" data-adj="${esc(p.id)}">Adjust</button>` : ''}</div>`;
+    }).join('') || '<p class="muted">No products yet.</p>'}</div>
+    ${can.mgr() ? '<p class="muted" style="font-size:13px">Use <b>Adjust</b> after a physical count or for wastage. Every adjustment is recorded with your name and reason.</p>' : ''}`;
+    $$('[data-adj]').forEach(b => b.onclick = () => adjustStock(b.dataset.adj));
+  };
+  draw(); return {update: () => { if (!$('#ov')) draw(); }};
+}
+function adjustStock(pid) {
+  const p = S.products.find(x => x.id === pid); if (!p) return;
+  let reason = 'Physical count';
+  sheet(`<h3>Adjust: ${esc(p.name)}</h3><p>Stock in app: <b>${qtyTxt(p.stock, p.unit)}</b></p>
+    <div class="seg" id="aseg"><button class="on" data-a="set">Actual count</button><button data-a="less">Remove (wastage)</button></div>
+    <label class="field"><span id="alb">Actual stock counted (${esc(p.unit)})</span><input id="av" inputmode="decimal" style="font-size:22px"></label>
+    <div class="chips" id="arc">${['Physical count', 'Wastage', 'Spoiled', 'Free / sample', 'Entry correction'].map((r, i) => `<button class="chip ${i ? '' : 'on'}">${r}</button>`).join('')}</div>
+    <div id="adiff" class="calc">&nbsp;</div><button class="btn primary big" id="as">Save adjustment</button>`);
+  let mode = 'set';
+  const diff = () => { const v = num($('#av').value); const d = mode === 'set' ? r3(v - num(p.stock)) : r3(-v); $('#adiff').textContent = $('#av').value === '' ? ' ' : `Change: ${d > 0 ? '+' : ''}${qtyTxt(d, p.unit)}`; return d; };
+  $$('#aseg button').forEach(b => b.onclick = () => { mode = b.dataset.a; $$('#aseg button').forEach(x => x.classList.toggle('on', x === b)); $('#alb').textContent = mode === 'set' ? `Actual stock counted (${p.unit})` : `Quantity to remove (${p.unit})`; diff(); });
+  $$('#arc .chip').forEach(b => b.onclick = () => { reason = b.textContent; $$('#arc .chip').forEach(x => x.classList.toggle('on', x === b)); });
+  $('#av').oninput = diff;
+  $('#as').onclick = () => {
+    if ($('#av').value === '') return toast('Enter a quantity', true);
+    const d = diff(); if (!d) return closeSheet();
+    DB.batch([{type: 'put', col: 'adjustments', id: DB.newId('adjustments'), data: {day: dayKey(), at: Date.now(), pid: p.id, name: p.name, unit: p.unit, before: num(p.stock), change: d, reason, byUid: S.me.uid, byName: S.me.name}},
+      {type: 'patch', col: 'products', id: p.id, data: {stock: INC(d)}}]).catch(e => toast(authMsg(e), true));
+    closeSheet(); toast('Stock updated');
+  };
+  setTimeout(() => { const i = $('#av'); if (i) i.focus(); }, 60);
+}
+
+/* ---------- BILLS ---------- */
+function vBills(view) {
+  let day = S.day, list = null;
+  view.innerHTML = `<div class="row between"><h2 style="margin:0">${can.mgr() ? 'All bills' : 'My bills'}</h2><input type="date" id="bd" value="${day}" max="${S.day}" style="width:auto"></div><div style="height:12px"></div><div id="bl"></div>`;
+  const draw = () => {
+    let src = day === S.day ? S.sales : (list || []);
+    if (!can.mgr()) src = src.filter(s => s.byUid === S.me.uid);
+    src = [...src].sort((a, b) => b.at - a.at);
+    const ok = src.filter(okSale);
+    $('#bl').innerHTML = `<div class="kpis">${kpi('Bills', ok.length, src.length - ok.length ? (src.length - ok.length) + ' void' : '')}${kpi('Total', money(sum(ok, 'total')), dateTxt(day))}</div>
+      <div class="card list">${src.length ? src.map((s, i) => `<div class="item tap" data-i="${i}"><div class="main"><b>${esc(s.billNo)}</b> ${s.status === 'void' ? '<span class="badge bad">VOID</span>' : ''} <span class="badge ${s.pay === 'credit' ? 'warn' : ''}">${PAY[s.pay]}</span>
+        <small>${timeTxt(s.at)} · ${esc(s.byName)} · ${s.items.map(x => esc(x.name)).join(', ')}${s.customer ? ' · ' + esc(s.customer) : ''}</small></div><div class="val" style="${s.status === 'void' ? 'text-decoration:line-through;color:var(--mu)' : ''}">${money(s.total)}</div></div>`).join('') : '<p class="muted center">No bills for this day.</p>'}</div>`;
+    $$('#bl [data-i]').forEach(el => el.onclick = () => showReceipt(src[+el.dataset.i], true));
+  };
+  const load = async () => {
+    if (day === S.day) { list = null; return draw(); }
+    $('#bl').innerHTML = '<p class="muted center">Loading…</p>';
+    try { list = await DB.fetch('sales', [['day', '==', day]]); draw(); } catch (e) { $('#bl').innerHTML = `<div class="alert bad">${esc(authMsg(e))}</div>`; }
+  };
+  $('#bd').onchange = e => { day = e.target.value || S.day; load(); };
+  load();
+  return {update: () => { if (day === S.day && !$('#ov')) draw(); }, reload: load};
+}
+
+/* ---------- MORE ---------- */
+function vMore(view) {
+  const items = [['#purchase', '🚚', 'Purchase / Add stock', 'Live or dressed chicken from supplier', can.mgr()], ['#process', '⚖️', 'Processing', 'Live bird → dressed weight & yield', can.mgr()],
+    ['#expense', '💸', 'Expenses', 'Rent, salary, ice, transport…', can.mgr()], ['#rates', '🏷️', "Today's rates & products", 'Change prices, add items', can.mgr()],
+    ['#reports', '📊', 'Reports', 'Sales, profit, export to Excel', can.mgr()], ['#closing', '🔒', 'Day closing', 'Count cash, record difference', can.mgr()],
+    ['#staff', '👥', 'Staff & logins', 'Add cashier / manager', can.owner()], ['#settings', '⚙️', 'Settings', 'Shop details, this phone, password', true]];
+  view.innerHTML = `<div class="card list">${items.filter(i => i[4]).map(([h, i, t, s]) => `<a class="item" href="${h}" style="text-decoration:none;color:inherit"><span style="font-size:24px">${i}</span><div class="main"><b>${t}</b><small>${s}</small></div><span class="muted">›</span></a>`).join('')}</div>
+    <div class="card row between"><div><b>${esc(S.me.name)}</b><small class="muted" style="display:block">${ROLE[S.me.role]} · phone ${esc(deviceCode())}</small></div><button class="btn" id="so">Sign out</button></div>
+    <p class="center muted" style="font-size:12px">RetailPro Mini v${VER}${MODE === 'demo' ? ' · demo mode' : ''}</p>`;
+  $('#so').onclick = signOut;
+}
+
+/* ---------- PURCHASE ---------- */
+function vPurchase(view) {
+  const ps = S.products.filter(p => p.active !== false);
+  const def = (ps.find(p => p.cat === 'live') || ps[0] || {}).id;
+  const sups = ls.get('rpm_sups', []);
+  view.innerHTML = `<h2>Purchase / Add stock</h2><form class="card" id="pf">
+    <label class="field"><span>Supplier</span><input id="ps" list="supl" required placeholder="e.g. Venkateshwara Farms"><datalist id="supl">${sups.map(s => `<option value="${esc(s)}">`).join('')}</datalist></label>
+    <label class="field"><span>Product</span><select id="pp">${ps.map(p => `<option value="${esc(p.id)}" ${p.id === def ? 'selected' : ''}>${esc(p.name)} (${esc(p.unit)})</option>`).join('')}</select></label>
+    <div class="grid2"><label class="field"><span>No. of birds (optional)</span><input id="pb" inputmode="numeric"></label><label class="field"><span id="pql">Total weight (kg)</span><input id="pq" inputmode="decimal" required></label></div>
+    <div class="grid2"><label class="field"><span>Rate per unit ₹</span><input id="pr" inputmode="decimal" required></label><label class="field"><span>Amount ₹</span><input id="pa" readonly></label></div>
+    <div class="grid2"><label class="field"><span>Paid now ₹</span><input id="ppd" inputmode="decimal" placeholder="= amount"></label><label class="field"><span>Paid by</span><select id="pm">${Object.entries(PPAY).map(([k, v]) => `<option value="${k}">${v}</option>`).join('')}</select></label></div>
+    <div id="pinfo" class="muted" style="min-height:20px;font-size:14px"></div>
+    <label class="field"><span>Note (optional)</span><input id="pn" placeholder="vehicle no., invoice no…"></label>
+    <button class="btn primary big">Save purchase</button></form>
+    <div class="sec">Today's purchases</div><div id="plist"></div>`;
+  const unitOf = () => (S.products.find(p => p.id === $('#pp').value) || {}).unit || 'kg';
+  const calc = () => {
+    const q = num($('#pq').value), r = num($('#pr').value), b = num($('#pb').value), a = r2(q * r);
+    $('#pa').value = a ? a.toFixed(2) : ''; $('#pql').textContent = unitOf() === 'kg' ? 'Total weight (kg)' : 'Quantity (pcs)';
+    const paid = $('#ppd').value === '' ? a : num($('#ppd').value);
+    $('#pinfo').innerHTML = [b && q && unitOf() === 'kg' ? `Avg ${r3(q / b).toFixed(3)} kg/bird` : '', a && paid < a ? `<span class="bad">Balance due to supplier: ${money(a - paid)}</span>` : ''].filter(Boolean).join(' · ');
+  };
+  ['#pq', '#pr', '#pb', '#ppd'].forEach(s => $(s).oninput = calc); $('#pp').onchange = calc; calc();
+  $('#pf').onsubmit = e => {
+    e.preventDefault();
+    const p = S.products.find(x => x.id === $('#pp').value); const q = r3(num($('#pq').value)), r = num($('#pr').value);
+    if (!p || q <= 0 || r <= 0) return toast('Enter quantity and rate', true);
+    const amount = r2(q * r), paid = r2($('#ppd').value === '' ? amount : Math.min(num($('#ppd').value), amount)), sup = $('#ps').value.trim();
+    DB.batch([{type: 'put', col: 'purchases', id: DB.newId('purchases'), data: {day: dayKey(), at: Date.now(), supplier: sup, pid: p.id, name: p.name, unit: p.unit, cat: p.cat, birds: num($('#pb').value), qty: q, rate: r, amount, paid, due: r2(amount - paid), payMode: $('#pm').value, note: $('#pn').value.trim(), byUid: S.me.uid, byName: S.me.name}},
+      {type: 'patch', col: 'products', id: p.id, data: {stock: INC(q)}}]).catch(er => toast(authMsg(er), true));
+    if (sup && !sups.includes(sup)) ls.set('rpm_sups', [sup, ...sups].slice(0, 30));
+    toast(`Added ${qtyTxt(q, p.unit)} ${p.name}`); ['#pb', '#pq', '#pr', '#ppd', '#pn'].forEach(s => $(s).value = ''); calc();
+  };
+  const draw = () => {
+    const L = S.purchases;
+    $('#plist').innerHTML = `<div class="card list">${L.length ? L.map(x => `<div class="item"><div class="main"><b>${esc(x.name)}</b> · ${qtyTxt(x.qty, x.unit)} @ ${money(x.rate)}<small>${timeTxt(x.at)} · ${esc(x.supplier || '-')}${x.birds ? ' · ' + x.birds + ' birds' : ''}${x.due ? ' · <span class="bad">due ' + money(x.due) + '</span>' : ''}</small></div><div class="val">${money(x.amount)}</div></div>`).join('') + `<div class="item"><div class="main"><b>Total</b></div><div class="val">${money(sum(L, 'amount'))}</div></div>` : '<p class="muted center">None yet today.</p>'}</div>`;
+  };
+  draw(); return {update: draw};
+}
+
+/* ---------- PROCESSING ---------- */
+function vProcess(view) {
+  const ps = S.products.filter(p => p.active !== false && p.unit === 'kg');
+  const srcs = ps.filter(p => p.cat === 'live'); const outs = ps.filter(p => p.cat !== 'live');
+  if (!srcs.length) { view.innerHTML = '<div class="alert warn">Add a product with category "Live bird" in Rates &amp; products first.</div>'; return {}; }
+  view.innerHTML = `<h2>Processing (live → dressed)</h2>
+    <div class="alert info" style="font-size:13px">Optional. Use this only when you dress live birds yourself. Shops that buy dressed chicken can skip it.</div>
+    <form class="card" id="xf"><label class="field"><span>From</span><select id="xs">${srcs.map(p => `<option value="${esc(p.id)}">${esc(p.name)} · ${qtyTxt(p.stock, 'kg')} in stock</option>`).join('')}</select></label>
+      <div class="grid2"><label class="field"><span>Birds</span><input id="xb" inputmode="numeric"></label><label class="field"><span>Live weight used (kg)</span><input id="xi" inputmode="decimal" required></label></div>
+      <div class="sec" style="margin-top:4px">Output weight (kg)</div>
+      ${outs.map(p => `<label class="row between field"><span style="flex:1">${esc(p.name)}</span><input class="small xo" data-id="${esc(p.id)}" inputmode="decimal" placeholder="0"></label>`).join('')}
+      <div class="card" style="background:#FAFAF9" id="xr"></div>
+      <button class="btn primary big">Save processing</button></form>
+    <div class="sec">Today's processing</div><div id="xl"></div>`;
+  const calc = () => {
+    const inKg = num($('#xi').value); const out = r3($$('.xo').reduce((a, i) => a + num(i.value), 0)); const waste = r3(inKg - out);
+    const y = inKg ? r2(out / inKg * 100) : 0;
+    $('#xr').innerHTML = `<div class="row between"><span>Output</span><b>${out.toFixed(3)} kg</b></div><div class="row between"><span>Yield</span><b class="${y && (y < 60 || y > 85) ? 'bad' : ''}">${y}%</b></div><div class="row between"><span>Waste / loss</span><b class="${waste < 0 ? 'bad' : ''}">${waste.toFixed(3)} kg</b></div>`;
+    return {inKg: r3(inKg), out, waste, y};
+  };
+  $$('#xf input').forEach(i => i.oninput = calc); calc();
+  $('#xf').onsubmit = e => {
+    e.preventDefault(); const c = calc(); const src = S.products.find(p => p.id === $('#xs').value);
+    if (c.inKg <= 0 || c.out <= 0) return toast('Enter live weight and at least one output', true);
+    if (c.waste < 0) return toast('Output is more than live weight — please check', true);
+    const outputs = $$('.xo').filter(i => num(i.value) > 0).map(i => { const p = S.products.find(x => x.id === i.dataset.id); return {pid: p.id, name: p.name, kg: r3(num(i.value))}; });
+    DB.batch([{type: 'put', col: 'processing', id: DB.newId('processing'), data: {day: dayKey(), at: Date.now(), srcId: src.id, srcName: src.name, birds: num($('#xb').value), inKg: c.inKg, outputs, outKg: c.out, wasteKg: c.waste, yieldPct: c.y, byUid: S.me.uid, byName: S.me.name}},
+      {type: 'patch', col: 'products', id: src.id, data: {stock: INC(-c.inKg)}}, ...outputs.map(o => ({type: 'patch', col: 'products', id: o.pid, data: {stock: INC(o.kg)}}))]).catch(er => toast(authMsg(er), true));
+    toast(`Processed ${c.inKg} kg · yield ${c.y}%`); $$('#xf input').forEach(i => i.value = ''); calc();
+  };
+  viewUnsubs.push(DB.watch('processing', [['day', '==', S.day]], d => {
+    d.sort((a, b) => b.at - a.at); const el = $('#xl'); if (!el) return;
+    el.innerHTML = `<div class="card list">${d.length ? d.map(x => `<div class="item"><div class="main"><b>${x.inKg} kg → ${x.outKg} kg</b> <span class="badge p">${x.yieldPct}%</span><small>${timeTxt(x.at)} · ${esc(x.srcName)}${x.birds ? ' · ' + x.birds + ' birds' : ''} · ${x.outputs.map(o => esc(o.name) + ' ' + o.kg).join(', ')}</small></div></div>`).join('') : '<p class="muted center">None yet today.</p>'}</div>`;
+  }));
+  return {};
+}
+
+/* ---------- EXPENSES ---------- */
+function vExpense(view) {
+  let cat = EXP_CATS[0], pay = 'cash';
+  view.innerHTML = `<h2>Expenses</h2><form class="card" id="ef">
+    <div class="chips" id="ec">${EXP_CATS.map((c, i) => `<button type="button" class="chip ${i ? '' : 'on'}">${c}</button>`).join('')}</div>
+    <label class="field"><span>Amount ₹</span><input id="ea" inputmode="decimal" required style="font-size:22px"></label>
+    <div class="seg" id="ep"><button type="button" data-p="cash" class="on">Cash</button><button type="button" data-p="upi">UPI</button></div>
+    <label class="field"><span>Note (optional)</span><input id="en"></label><button class="btn primary big">Save expense</button></form>
+    <div class="sec">Today's expenses</div><div id="el"></div>`;
+  $$('#ec .chip').forEach(b => b.onclick = () => { cat = b.textContent; $$('#ec .chip').forEach(x => x.classList.toggle('on', x === b)); });
+  $$('#ep button').forEach(b => b.onclick = () => { pay = b.dataset.p; $$('#ep button').forEach(x => x.classList.toggle('on', x === b)); });
+  $('#ef').onsubmit = e => {
+    e.preventDefault(); const a = r2(num($('#ea').value)); if (a <= 0) return toast('Enter the amount', true);
+    DB.put('expenses', DB.newId('expenses'), {day: dayKey(), at: Date.now(), cat, amount: a, pay, note: $('#en').value.trim(), byUid: S.me.uid, byName: S.me.name}).catch(er => toast(authMsg(er), true));
+    toast(`${cat} ${money(a)} saved`); $('#ea').value = ''; $('#en').value = '';
+  };
+  const draw = () => {
+    const L = S.expenses;
+    $('#el').innerHTML = `<div class="card list">${L.length ? L.map(x => `<div class="item"><div class="main"><b>${esc(x.cat)}</b> <span class="badge">${x.pay === 'upi' ? 'UPI' : 'Cash'}</span><small>${timeTxt(x.at)} · ${esc(x.byName)}${x.note ? ' · ' + esc(x.note) : ''}</small></div><div class="val">${money(x.amount)}</div></div>`).join('') + `<div class="item"><div class="main"><b>Total</b></div><div class="val">${money(sum(L, 'amount'))}</div></div>` : '<p class="muted center">None yet today.</p>'}</div>`;
+  };
+  draw(); return {update: draw};
+}
+
+/* ---------- RATES & PRODUCTS ---------- */
+function vRates(view) {
+  const draw = () => {
+    const ps = S.products.filter(p => can.owner() || p.active !== false);
+    view.innerHTML = `<h2>Today's rates</h2><div class="card">${ps.map(p => `<div class="row between" style="padding:6px 0;border-bottom:1px solid var(--ln)">
+        <div style="flex:1;min-width:0"><b>${esc(p.name)}</b> ${p.active === false ? '<span class="badge">hidden</span>' : ''}<small class="muted" style="display:block">per ${esc(p.unit)}${p.rateAt ? ' · changed ' + new Date(p.rateAt).toLocaleDateString('en-IN') : ''}</small></div>
+        <input class="small rt" data-id="${esc(p.id)}" inputmode="decimal" value="${num(p.rate)}">${can.owner() ? `<button class="btn sm" data-ed="${esc(p.id)}">✎</button>` : ''}</div>`).join('')}
+      <button class="btn primary big" id="rs">Save rates</button></div>
+      ${can.owner() ? '<button class="btn full" id="addP">+ Add product</button>' : ''}`;
+    $('#rs').onclick = () => {
+      const ops = $$('.rt').map(i => ({p: S.products.find(x => x.id === i.dataset.id), v: r2(num(i.value))})).filter(o => o.p && o.v > 0 && o.v !== num(o.p.rate))
+        .map(o => ({type: 'patch', col: 'products', id: o.p.id, data: {rate: o.v, rateAt: Date.now()}}));
+      if (!ops.length) return toast('No rate changed');
+      DB.batch(ops).catch(e => toast(authMsg(e), true)); toast(`${ops.length} rate(s) updated`);
+    };
+    $$('[data-ed]').forEach(b => b.onclick = () => editProduct(S.products.find(p => p.id === b.dataset.ed)));
+    if ($('#addP')) $('#addP').onclick = () => editProduct(null);
+  };
+  draw();
+  return {update: () => { if (!$('#ov') && !$$('.rt').some(i => i === document.activeElement)) draw(); }};
+}
+function editProduct(p) {
+  const n = !p; p = p || {unit: 'kg', cat: 'dressed', active: true, sort: S.products.length + 1};
+  sheet(`<h3>${n ? 'Add product' : 'Edit product'}</h3>
+    <label class="field"><span>Name</span><input id="en" value="${esc(p.name || '')}"></label>
+    <div class="grid2"><label class="field"><span>Sold by</span><select id="eu"><option value="kg" ${p.unit === 'kg' ? 'selected' : ''}>Weight (kg)</option><option value="pc" ${p.unit === 'pc' ? 'selected' : ''}>Piece</option></select></label>
+      <label class="field"><span>Category</span><select id="ec">${Object.entries(CATS).map(([k, v]) => `<option value="${k}" ${p.cat === k ? 'selected' : ''}>${v}</option>`).join('')}</select></label></div>
+    <div class="grid2"><label class="field"><span>Rate ₹</span><input id="er" inputmode="decimal" value="${p.rate ?? ''}"></label><label class="field"><span>Low-stock alert at</span><input id="el" inputmode="decimal" value="${p.low ?? ''}"></label></div>
+    <div class="grid2"><label class="field"><span>Display order</span><input id="eo" inputmode="numeric" value="${p.sort ?? ''}"></label><label class="row field" style="margin-top:22px"><input type="checkbox" id="ea" ${p.active !== false ? 'checked' : ''}> Show in billing</label></div>
+    <button class="btn primary big" id="es">Save</button>`);
+  $('#es').onclick = () => {
+    const d = {name: $('#en').value.trim(), unit: $('#eu').value, cat: $('#ec').value, rate: r2(num($('#er').value)), low: num($('#el').value), sort: num($('#eo').value), active: $('#ea').checked};
+    if (!d.name || d.rate <= 0) return toast('Enter name and rate', true);
+    (n ? DB.put('products', DB.newId('products'), {...d, stock: 0, createdAt: Date.now()}) : DB.patch('products', p.id, d)).catch(e => toast(authMsg(e), true));
+    closeSheet(); toast('Product saved');
+  };
+}
+
+/* ---------- REPORTS ---------- */
+function vReports(view) {
+  let from = S.day, to = S.day, data = null;
+  const presets = {today: 'Today', yest: 'Yesterday', d7: 'Last 7 days', month: 'This month', lmonth: 'Last month', custom: 'Custom'};
+  view.innerHTML = `<h2>Reports</h2><div class="chips" id="rpre">${Object.entries(presets).map(([k, v], i) => `<button class="chip ${i ? '' : 'on'}" data-k="${k}">${v}</button>`).join('')}</div>
+    <div class="grid2 hidden" id="rcus"><label class="field"><span>From</span><input type="date" id="rf"></label><label class="field"><span>To</span><input type="date" id="rt"></label></div><div id="rep"></div>`;
+  const setP = k => {
+    const t = S.day;
+    if (k === 'today') from = to = t; else if (k === 'yest') from = to = addDays(t, -1); else if (k === 'd7') { from = addDays(t, -6); to = t; }
+    else if (k === 'month') { from = t.slice(0, 8) + '01'; to = t; } else if (k === 'lmonth') { to = addDays(t.slice(0, 8) + '01', -1); from = to.slice(0, 8) + '01'; }
+    $('#rcus').classList.toggle('hidden', k !== 'custom'); $('#rf').value = from; $('#rt').value = to; load();
+  };
+  $$('#rpre .chip').forEach(b => b.onclick = () => { $$('#rpre .chip').forEach(x => x.classList.toggle('on', x === b)); setP(b.dataset.k); });
+  $('#rf').onchange = $('#rt').onchange = () => { from = $('#rf').value; to = $('#rt').value; if (from && to && from <= to) load(); };
+  async function load() {
+    $('#rep').innerHTML = '<p class="muted center">Loading…</p>';
+    const f = [['day', '>=', from], ['day', '<=', to]];
+    try { const [sa, pu, ex, pr, ad] = await Promise.all(['sales', 'purchases', 'expenses', 'processing', 'adjustments'].map(c => DB.fetch(c, f))); data = {sa, pu, ex, pr, ad}; draw(); }
+    catch (e) { $('#rep').innerHTML = `<div class="alert bad">Could not load: ${esc(authMsg(e))}</div>`; }
+  }
+  function draw() {
+    const {sa, pu, ex, pr, ad} = data; const ok = sa.filter(okSale), vd = sa.filter(s => !okSale(s));
+    const sales = sum(ok, 'total'), purch = sum(pu, 'amount'), exp = sum(ex, 'amount'), profit = r2(sales - purch - exp);
+    const group = (arr, key, val) => { const m = {}; arr.forEach(x => { const k = key(x); m[k] = m[k] || {k, n: 0, q: 0, a: 0}; m[k].n++; m[k].q += num(val ? val(x).q : 0); m[k].a += num(val ? val(x).a : x.total ?? x.amount); }); return Object.values(m).sort((a, b) => b.a - a.a); };
+    const lines = ok.flatMap(s => s.items.map(i => ({...i, s})));
+    const byProd = group(lines, l => l.name + '|' + l.unit, l => ({q: l.qty, a: l.amount}));
+    const byPay = group(ok, s => PAY[s.pay] || s.pay), byStaff = group(ok, s => s.byName), byExp = group(ex, x => x.cat);
+    const liveP = pu.filter(x => x.unit === 'kg'), liveKg = sum(liveP, 'qty'); const credit = ok.filter(s => s.pay === 'credit'); const due = sum(pu, 'due');
+    const inKg = sum(pr, 'inKg'), outKg = sum(pr, 'outKg');
+    const days = []; for (let d = from, i = 0; d <= to && i < 62; d = addDays(d, 1), i++) days.push(d);
+    const daily = days.map(d => { const s = sum(ok.filter(x => x.day === d), 'total'), p = sum(pu.filter(x => x.day === d), 'amount'), e = sum(ex.filter(x => x.day === d), 'amount'); return {d, n: ok.filter(x => x.day === d).length, s, p, e, pf: r2(s - p - e)}; }).filter(r => r.n || r.p || r.e);
+    const tbl = (head, rows) => `<div class="tblwrap"><table><tr>${head.map((h, i) => `<th class="${i ? 'n' : ''}">${h}</th>`).join('')}</tr>${rows.map(r => `<tr>${r.map((c, i) => `<td class="${i ? 'n' : ''}">${c}</td>`).join('')}</tr>`).join('')}</table></div>`;
+    const title = from === to ? dateTxt(from) : `${dateTxt(from)} – ${dateTxt(to)}`;
+    $('#rep').innerHTML = `<div id="repBody"><h3>${esc(S.shop.name || '')} · ${title}</h3>
+      <div class="kpis">${kpi('Sales', money(sales), pl(ok.length, 'bill') + ' · avg ' + money(ok.length ? sales / ok.length : 0), true)}${kpi('Purchases', money(purch), r3(liveKg).toFixed(1) + ' kg' + (liveKg ? ' · ' + money(sum(liveP, 'amount') / liveKg) + '/kg' : ''))}${kpi('Expenses', money(exp), (ex.length === 1 ? '1 entry' : ex.length + ' entries'))}${kpi('Est. profit', `<span class="${profit < 0 ? 'bad' : 'ok'}">${money(profit)}</span>`, 'sales − purchases − expenses')}</div>
+      ${vd.length ? `<div class="alert warn">${vd.length} voided bill(s) worth ${money(sum(vd, 'total'))} excluded.</div>` : ''}
+      <div class="sec">By product</div><div class="card">${byProd.length ? tbl(['Product', 'Qty', 'Amount'], byProd.map(r => { const [n, u] = r.k.split('|'); return [esc(n), qtyTxt(r.q, u), money(r.a)]; })) : '<p class="muted">No sales.</p>'}</div>
+      <div class="grid2 r1" style="align-items:start"><div><div class="sec">By payment</div><div class="card">${tbl(['Mode', 'Bills', 'Amount'], byPay.map(r => [r.k, r.n, money(r.a)]))}</div></div>
+        <div><div class="sec">By staff</div><div class="card">${tbl(['Staff', 'Bills', 'Amount'], byStaff.map(r => [esc(r.k), r.n, money(r.a)]))}</div></div></div>
+      <div class="sec">Expenses</div><div class="card">${byExp.length ? tbl(['Category', 'Entries', 'Amount'], byExp.map(r => [esc(r.k), r.n, money(r.a)])) : '<p class="muted">No expenses.</p>'}</div>
+      ${pr.length ? `<div class="sec">Processing</div><div class="card"><div class="row between"><span>Live used → output</span><b>${r3(inKg).toFixed(1)} kg → ${r3(outKg).toFixed(1)} kg</b></div><div class="row between"><span>Average yield</span><b>${inKg ? r2(outKg / inKg * 100) : 0}%</b></div></div>` : ''}
+      ${credit.length ? `<div class="sec">Credit sales (to collect)</div><div class="card">${tbl(['Customer', 'Bill', 'Amount'], credit.map(s => [esc(s.customer) + (s.phone ? ' · ' + esc(s.phone) : ''), esc(s.billNo), money(s.total)]))}</div>` : ''}
+      ${due ? `<div class="alert warn">Supplier balance due for this period: <b>${money(due)}</b></div>` : ''}
+      ${ad.length ? `<div class="sec">Stock adjustments</div><div class="card">${tbl(['Item', 'Change', 'Reason / by'], ad.map(a => [esc(a.name), (a.change > 0 ? '+' : '') + qtyTxt(a.change, a.unit), esc(a.reason) + ' · ' + esc(a.byName)]))}</div>` : ''}
+      ${days.length > 1 && daily.length ? `<div class="sec">Day by day</div><div class="card">${tbl(['Day', 'Bills', 'Sales', 'Purch.', 'Exp.', 'Profit'], daily.map(r => [dateTxt(r.d), r.n, money(r.s), money(r.p), money(r.e), money(r.pf)]))}</div>` : ''}
+      <p class="muted" style="font-size:12px">Estimated profit is a simple cash view: everything bought in the period counts as cost, even if some is still in stock.</p></div>
+      <div class="row wrap gap noprint"><button class="btn" id="cs1">⬇ Sales CSV</button><button class="btn" id="cs2">⬇ Daily summary CSV</button><button class="btn" id="cs3">🖨️ Print / PDF</button></div>`;
+    $('#cs1').onclick = () => downloadCSV(`sales_${from}_${to}.csv`, [['Date', 'Time', 'Bill No', 'Staff', 'Device', 'Payment', 'Customer', 'Phone', 'Product', 'Qty', 'Unit', 'Rate', 'Line amount', 'Bill discount', 'Bill total', 'Status'],
+      ...sa.sort((a, b) => a.at - b.at).flatMap(s => s.items.map((i, ix) => [s.day, timeTxt(s.at), s.billNo, s.byName, s.device, PAY[s.pay], s.customer, s.phone, i.name, i.qty, i.unit, i.rate, i.amount, ix ? '' : s.discount, ix ? '' : s.total, s.status]))]);
+    $('#cs2').onclick = () => downloadCSV(`summary_${from}_${to}.csv`, [['Date', 'Bills', 'Sales', 'Purchases', 'Expenses', 'Est. profit'], ...daily.map(r => [r.d, r.n, r.s, r.p, r.e, r.pf])]);
+    $('#cs3').onclick = () => printHTML($('#repBody').innerHTML, true);
+  }
+  setP('today');
+  return {};
+}
+
+/* ---------- DAY CLOSING ---------- */
+function vClosing(view) {
+  const day = S.day; let saved = null;
+  view.innerHTML = `<h2>Day closing · ${dateTxt(day)}</h2><div id="cb"></div>`;
+  const draw = () => {
+    const ok = S.sales.filter(okSale);
+    const cashS = sum(ok.filter(s => s.pay === 'cash'), 'total'), upiS = sum(ok.filter(s => s.pay === 'upi'), 'total'), credS = sum(ok.filter(s => s.pay === 'credit'), 'total');
+    const cashE = sum(S.expenses.filter(x => x.pay !== 'upi'), 'amount'), cashP = sum(S.purchases.filter(x => x.payMode === 'cash'), 'paid');
+    const opening = $('#co') ? num($('#co').value) : num(saved ? saved.opening : 0);
+    const counted = $('#cc') ? $('#cc').value : (saved ? String(saved.counted) : '');
+    const exp = r2(opening + cashS - cashE - cashP), diff = counted === '' ? null : r2(num(counted) - exp);
+    $('#cb').innerHTML = `${saved ? `<div class="alert info">Closed by ${esc(saved.byName)} at ${timeTxt(saved.at)}. You can update and save again.</div>` : ''}
+      <div class="card"><label class="row between field"><span>Opening cash in drawer</span><input id="co" class="small" inputmode="decimal" value="${opening || ''}" placeholder="0"></label>
+        <div class="row between"><span>+ Cash sales</span><b>${money(cashS)}</b></div>
+        <div class="row between" style="margin-top:6px"><span>− Cash expenses</span><b>${money(cashE)}</b></div>
+        <div class="row between" style="margin-top:6px"><span>− Cash paid to suppliers</span><b>${money(cashP)}</b></div>
+        <div class="row between grand" style="border-top:1px solid var(--ln);margin-top:8px"><span>Expected cash</span><b>${money(exp)}</b></div>
+        <label class="row between field"><span><b>Cash counted now</b></span><input id="cc" class="small" inputmode="decimal" value="${esc(counted)}" style="font-size:18px"></label>
+        <div class="row between grand"><span>Difference</span><b class="${diff == null ? '' : diff < 0 ? 'bad' : 'ok'}">${diff == null ? '—' : (diff > 0 ? '+' : '') + money(diff)}</b></div>
+        <label class="field"><span>Note</span><input id="cn" value="${esc(saved ? saved.note || '' : '')}" placeholder="reason for difference, if any"></label>
+        <button class="btn primary big" id="cs">Save closing</button></div>
+      <div class="card"><div class="row between"><span>UPI sales (check bank app)</span><b>${money(upiS)}</b></div><div class="row between" style="margin-top:6px"><span>Credit sales</span><b>${money(credS)}</b></div><div class="row between" style="margin-top:6px"><span>Total sales</span><b>${money(cashS + upiS + credS)}</b></div></div>`;
+    ['#co', '#cc'].forEach(s => $(s).onchange = draw);
+    $('#cs').onclick = () => {
+      if ($('#cc').value === '') return toast('Enter the cash counted', true);
+      DB.put('closing', day, {day, at: Date.now(), opening, cashSales: cashS, upiSales: upiS, creditSales: credS, cashExpenses: cashE, cashPurchases: cashP, expected: exp, counted: num($('#cc').value), diff: r2(num($('#cc').value) - exp), note: $('#cn').value.trim(), byUid: S.me.uid, byName: S.me.name})
+        .catch(e => toast(authMsg(e), true));
+      toast('Day closing saved');
+    };
+  };
+  viewUnsubs.push(DB.watchDoc('closing', day, d => { saved = d; draw(); }));
+  return {update: () => { if (document.activeElement && document.activeElement.tagName === 'INPUT') return; draw(); }};
+}
+
+/* ---------- STAFF ---------- */
+function vStaff(view) {
+  view.innerHTML = `<h2>Staff &amp; logins</h2><div id="sl"><p class="muted">Loading…</p></div><button class="btn primary big" id="sa">+ Add staff login</button>
+    <p class="muted" style="font-size:13px">Staff sign in with their username and password. If someone forgets a password or leaves, switch their login <b>off</b> and create a new one. A disabled login stops working at once on every phone.</p>`;
+  viewUnsubs.push(DB.watch('users', [], d => {
+    const el = $('#sl'); if (!el) return;
+    d.sort((a, b) => ['owner', 'manager', 'cashier'].indexOf(a.role) - ['owner', 'manager', 'cashier'].indexOf(b.role) || String(a.name).localeCompare(b.name));
+    el.innerHTML = `<div class="card list">${d.map(u => `<div class="item"><div class="main"><b>${esc(u.name)}</b> ${u.active === false ? '<span class="badge bad">Off</span>' : ''}<small>@${esc(u.username || '')}</small></div>
+      ${u.id === S.me.uid || u.role === 'owner' ? `<span class="badge p">${ROLE[u.role]}</span>` : `<select data-role="${esc(u.id)}" style="width:auto;min-height:38px;padding:6px">${['manager', 'cashier'].map(r => `<option value="${r}" ${u.role === r ? 'selected' : ''}>${ROLE[r]}</option>`).join('')}</select>
+      <button class="btn sm ${u.active === false ? '' : 'danger'}" data-tog="${esc(u.id)}" data-on="${u.active === false ? 1 : 0}">${u.active === false ? 'Turn on' : 'Turn off'}</button>`}</div>`).join('')}</div>`;
+    $$('[data-role]').forEach(s => s.onchange = () => DB.patch('users', s.dataset.role, {role: s.value}).then(() => toast('Role updated')).catch(e => toast(authMsg(e), true)));
+    $$('[data-tog]').forEach(b => b.onclick = () => { const on = b.dataset.on === '1'; if (!on && !confirm('Turn off this login? They will be signed out.')) return; DB.patch('users', b.dataset.tog, {active: on}).catch(e => toast(authMsg(e), true)); });
+  }));
+  $('#sa').onclick = () => {
+    sheet(`<h3>Add staff login</h3><form id="nf"><label class="field"><span>Name</span><input id="nn" required></label>
+      <label class="field"><span>Username</span><input id="nu" required autocapitalize="none" pattern="[A-Za-z0-9._\\-]{3,20}" placeholder="e.g. ravi"></label>
+      ${MODE === 'fb' ? '<label class="field"><span>Password (min 6)</span><input id="np" required minlength="6"></label>' : ''}
+      <div class="seg" id="nr"><button type="button" data-r="cashier" class="on">Cashier</button><button type="button" data-r="manager">Manager</button></div>
+      <p class="muted" style="font-size:13px"><b>Cashier:</b> billing, own bills, stock view. <b>Manager:</b> also purchases, processing, expenses, rates, reports, voids and closing.</p>
+      <button class="btn primary big" id="nb">Create login</button></form>`);
+    let role = 'cashier';
+    $$('#nr button').forEach(b => b.onclick = () => { role = b.dataset.r; $$('#nr button').forEach(x => x.classList.toggle('on', x === b)); });
+    $('#nf').onsubmit = async e => {
+      e.preventDefault(); if (!navigator.onLine && MODE === 'fb') return toast('Creating a login needs internet', true);
+      const b = $('#nb'); b.disabled = true; b.textContent = 'Creating…';
+      try { await AUTH.createStaff({name: $('#nn').value.trim(), user: $('#nu').value.trim(), pw: $('#np') ? $('#np').value : '', role}); closeSheet(); toast('Login created. Share the username and password with them.'); }
+      catch (er) { toast(authMsg(er), true); b.disabled = false; b.textContent = 'Create login'; }
+    };
+  };
+  return {};
+}
+
+/* ---------- SETTINGS ---------- */
+function vSettings(view) {
+  const sh = S.shop || {}; const own = can.owner();
+  view.innerHTML = `${own ? `<h2>Shop details</h2><form class="card" id="shf">
+      <label class="field"><span>Shop name</span><input id="s1" value="${esc(sh.name || '')}" required></label>
+      <label class="field"><span>Address</span><input id="s2" value="${esc(sh.address || '')}"></label>
+      <div class="grid2"><label class="field"><span>Phone</span><input id="s3" value="${esc(sh.phone || '')}" inputmode="tel"></label><label class="field"><span>GSTIN (if registered)</span><input id="s4" value="${esc(sh.gstin || '')}"></label></div>
+      <label class="field"><span>Bill footer</span><input id="s5" value="${esc(sh.footer || '')}"></label>
+      <label class="row field"><input type="checkbox" id="s6" ${sh.cashierRateEdit ? 'checked' : ''}> Allow cashiers to change the rate on a bill</label>
+      <button class="btn primary full">Save shop details</button></form>` : ''}
+    <h2>This phone</h2><div class="card">
+      <label class="field"><span>Phone code (printed in bill numbers, keep it different on each phone)</span><input id="dv" value="${esc(deviceCode())}" maxlength="4" autocapitalize="characters"></label>
+      <label class="field"><span>Bill printer paper</span><select id="pw"><option value="58">58 mm (2 inch)</option><option value="80">80 mm (3 inch)</option></select></label>
+      <button class="btn full" id="dvs">Save phone settings</button>
+      <button class="btn full" id="bk" style="margin-top:10px">⬇ Download backup of bills made on this phone</button></div>
+    ${MODE === 'fb' ? `<h2>My password</h2><form class="card" id="pwf"><label class="field"><span>Current password</span><input type="password" id="p1" required></label><label class="field"><span>New password (min 6)</span><input type="password" id="p2" minlength="6" required></label><button class="btn full">Change password</button></form>` : ''}
+    ${MODE === 'demo' ? '<div class="card"><button class="btn danger full" id="dr">Reset demo data</button><button class="btn ghost" id="dx">Exit demo mode</button></div>' : ''}
+    <button class="btn full" id="so2">Sign out</button>
+    <p class="center muted" style="font-size:12px">RetailPro Mini v${VER} · ${MODE === 'fb' ? 'Firebase: ' + esc(CFG.projectId) : 'Demo mode (data on this phone only)'}</p>`;
+  $('#pw').value = String(ls.get('rpm_paper', 58));
+  if (own) $('#shf').onsubmit = e => { e.preventDefault(); DB.put('meta', 'shop', {name: $('#s1').value.trim(), address: $('#s2').value.trim(), phone: $('#s3').value.trim(), gstin: $('#s4').value.trim().toUpperCase(), footer: $('#s5').value.trim(), cashierRateEdit: $('#s6').checked}, true).catch(er => toast(authMsg(er), true)); toast('Shop details saved'); };
+  $('#dvs').onclick = () => { const c = $('#dv').value.trim().toUpperCase().replace(/[^A-Z0-9]/g, ''); if (!c) return toast('Enter a code like C1', true); ls.set('rpm_dev', c); ls.set('rpm_paper', +$('#pw').value); toast('Saved'); };
+  $('#bk').onclick = () => downloadFile(`bills_backup_${deviceCode()}_${S.day}.json`, JSON.stringify(ls.get('rpm_billlog', []), null, 1), 'application/json');
+  if ($('#pwf')) $('#pwf').onsubmit = async e => { e.preventDefault(); try { await AUTH.changePassword($('#p1').value, $('#p2').value); toast('Password changed'); $('#p1').value = $('#p2').value = ''; } catch (er) { toast(authMsg(er), true); } };
+  if ($('#dr')) $('#dr').onclick = () => { if (confirm('Delete all demo data?')) { DB.reset(); ls.del('rpm_demo_uid'); location.reload(); } };
+  if ($('#dx')) $('#dx').onclick = () => { ls.del('rpm_demo_on'); ls.del('rpm_demo_uid'); location.reload(); };
+  $('#so2').onclick = signOut;
+  return {};
+}
+
+/* ---------- boot ---------- */
+async function boot() {
+  if ('serviceWorker' in navigator && location.protocol === 'https:') navigator.serviceWorker.register('sw.js').catch(e => console.warn('SW', e));
+  if (MODE === 'setup') return vSetup();
+  if (MODE === 'fb') {
+    try { await loadFirebase(); } catch (e) {
+      $('#view').innerHTML = `<div class="login card center"><div class="logo">🐔</div><p>Could not start. Open the app once with internet so it can be saved on this phone.</p><button class="btn" onclick="location.reload()">Try again</button></div>`; return;
+    }
+    DB = makeFB(); AUTH = makeFBAuth();
+  } else { DB = makeDemo(); AUTH = makeDemoAuth(); }
+  AUTH.onChange(startSession);
+}
+async function loadFirebase() {
+  const b = `https://www.gstatic.com/firebasejs/${FB_VER}/`;
+  await loadScript(b + 'firebase-app-compat.js');
+  await Promise.all([loadScript(b + 'firebase-auth-compat.js'), loadScript(b + 'firebase-firestore-compat.js')]);
+}
+boot();
+</script>
+</body>
+</html>
